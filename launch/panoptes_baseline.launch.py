@@ -30,7 +30,7 @@ def generate_launch_description():
         # Node for the AprilTag detection
         Node(
             package='apriltag_ros',
-            executable='apriltag_node',
+            executable='apriltag_inv_node',
             name='apriltag',
             namespace=LaunchConfiguration('namespace'),
             remappings=[

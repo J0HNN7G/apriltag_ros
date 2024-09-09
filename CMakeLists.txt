@@ -121,9 +121,39 @@ rclcpp_components_register_node(AprilTagNode
     EXECUTABLE "apriltag_node"
 )
 
+# composable node for inverse
+add_library(AprilTagInvNode SHARED
+    src/AprilTagInvNode.cpp
+)
+ament_target_dependencies(AprilTagInvNode
+    rclcpp
+    rclcpp_components
+    sensor_msgs
+    apriltag_msgs
+    tf2_ros
+    tf2
+    image_transport
+    cv_bridge
+)
+target_link_libraries(AprilTagInvNode
+    apriltag::apriltag
+    tags
+    pose_estimation
+)
+rclcpp_components_register_node(AprilTagInvNode
+    PLUGIN "AprilTagInvNode"
+    EXECUTABLE "apriltag_inv_node"
+)
+
 ament_environment_hooks(${ament_cmake_package_templates_ENVIRONMENT_HOOK_LIBRARY_PATH})
 
 install(TARGETS AprilTagNode
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+)
+
+
+install(TARGETS AprilTagInvNode
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
 )
