@@ -34,8 +34,9 @@ def generate_launch_description():
             name='apriltag',
             namespace=LaunchConfiguration('namespace'),
             remappings=[
-                ('/apriltag/image_rect', LaunchConfiguration('image_rect')),
-                ('/apriltag/camera_info', LaunchConfiguration('camera_info'))
+                ('image_rect', LaunchConfiguration('image_rect')),
+                ('camera_info', LaunchConfiguration('camera_info')),
+                ('detections', 'oak/apriltag/detections'),
             ],
             parameters=[LaunchConfiguration('params_file')],
             output='screen'
